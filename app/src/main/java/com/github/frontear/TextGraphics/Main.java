@@ -63,61 +63,20 @@ public class Main {
     }
 
     /**
-     * 1 2
-     * 3 4
+     * Greater emphasis is put on the pair diff then the summation diff, and greater emphasis is put on the diff diffs as well. This is so confusing lmao
      * 
-     * 1 2
-     * 3
-     * 
-     * 1 2 3
-     * 4 5 6
-     * 7 8 9
-     * 
-     * 1 2 3
-     * 4 5 6
-     * 7
+     * 26: 5*5, as 5-5=0 and 26-(5*5)=1 where 0 and 1 are the smallest differences
+     * 27: 5*5, as 5-5=0 and 27-(5*5)=2 where 0 and 2 are the smallest differences
+     * 28: 6*5, as 6-5=1 and 28-(6*5)=2 where 1 and 2 are the smallest differences (5-5=0 and 28-(6*5)=2, 0 and 2 diff is larger than 1 and 2)
+     * 29: 6*5, as 6-5=1 and 29-(6*5)=1 where 1 and 1 are the smallest differences (5-5=0 and 29-(6*5)=1, 0 and 1 diff is larger than 1 and 1)
+     * 30: 6*5, as 6-5=1 and 30-(6*5)=0 where 1 and 0 are the smallest differences (5-5=0 and 30-(6*5)=0, 0 and 4 diff is larger than 1 and 1)
      */
     public static void main(String[] args) {
-        var len = "abcdefghijklmnopqrstuvwxyz".length();
-        System.out.println(len); // 26, the most efficient multiply pair is 4 * 6 + 2
-
-        var i_diff = -1;
-        var j_diff = -1;
-        var ij_diff = -1;
-        var mul_diff = -1;
+        var len = 27;
 
         for (var i = 1; i <= len; ++i) {
             for (var j = 1; j <= len / i; ++j) {
-                var ij = Math.abs(i - j);
-                var mul = Math.abs((i * j) - len);
-
-                if (i_diff == -1 || j_diff == -1 || ij_diff == -1 || mul_diff == -1) {
-                    i_diff = i;
-                    
-                    if (j_diff == -1) {
-                        j_diff = j;
-                    }
-                    if (ij_diff == -1) {
-                        ij_diff = ij;
-                    }
-                    if (mul_diff == -1) {
-                        mul_diff = mul;
-                    }
-
-                    continue;
-                }
-                else if (ij_diff != -1 && mul_diff != -1) {
-                    if (ij_diff - ij < 0 && mul_diff - mul < 0) {
-                        System.out.println(String.format("%d * %d, %d %d", i_diff, j_diff, ij_diff, mul_diff));
-                        return;
-                    }
-                    else {
-                        i_diff = i;
-                        j_diff = j;
-                        ij_diff = ij;
-                        mul_diff = mul;
-                    }
-                }
+                System.out.println(i + " " + j + ", " + Math.abs(i - j) + " " + Math.abs(len - i * j) + ", " + Math.abs(Math.abs(i - j) - Math.abs(len - i * j)));
             }
         }
     }
