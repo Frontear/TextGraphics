@@ -78,10 +78,47 @@ public class Main {
      * 7
      */
     public static void main(String[] args) {
-        var metrics = getFontMetrics();
-        var image = createTexture("abcdefghijklmnopqrstuvwxyz");
+        var len = "abcdefghijklmnopqrstuvwxyz".length();
+        System.out.println(len); // 26, the most efficient multiply pair is 4 * 6 + 2
 
-        System.out.println(image.getWidth());
-        System.out.println(image.getHeight());
+        var i_diff = -1;
+        var j_diff = -1;
+        var ij_diff = -1;
+        var mul_diff = -1;
+
+        for (var i = 1; i <= len; ++i) {
+            for (var j = 1; j <= len / i; ++j) {
+                var ij = Math.abs(i - j);
+                var mul = Math.abs((i * j) - len);
+
+                if (i_diff == -1 || j_diff == -1 || ij_diff == -1 || mul_diff == -1) {
+                    i_diff = i;
+                    
+                    if (j_diff == -1) {
+                        j_diff = j;
+                    }
+                    if (ij_diff == -1) {
+                        ij_diff = ij;
+                    }
+                    if (mul_diff == -1) {
+                        mul_diff = mul;
+                    }
+
+                    continue;
+                }
+                else if (ij_diff != -1 && mul_diff != -1) {
+                    if (ij_diff - ij < 0 && mul_diff - mul < 0) {
+                        System.out.println(String.format("%d * %d, %d %d", i_diff, j_diff, ij_diff, mul_diff));
+                        return;
+                    }
+                    else {
+                        i_diff = i;
+                        j_diff = j;
+                        ij_diff = ij;
+                        mul_diff = mul;
+                    }
+                }
+            }
+        }
     }
 }
