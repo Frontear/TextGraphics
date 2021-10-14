@@ -74,7 +74,7 @@ public class Main {
     public static void main(String[] args) {
         var len = 27;
 
-        for (var i = 1; i <= len; ++i) {
+        for (var i = 1; i <= Math.sqrt(len); ++i) {
             for (var j = 1; j <= len / i; ++j) {
                 System.out.println(i + " " + j + ", " + Math.abs(i - j) + " " + Math.abs(len - i * j) + ", " + Math.abs(Math.abs(i - j) - Math.abs(len - i * j)));
             }
