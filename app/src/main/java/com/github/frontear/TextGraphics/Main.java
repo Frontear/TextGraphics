@@ -3,6 +3,7 @@ package com.github.frontear.TextGraphics;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Main {
     private static final String CHARACTERS = "0123456789abcdefghijklmnopqrstuvwxyz"; //ABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ ";
@@ -73,6 +74,7 @@ public class Main {
      */
     public static void main(String[] args) {
         var len = 27;
+        var diff_list = new ArrayList<int[]>();
 
         for (var i = 1; i <= Math.sqrt(len); ++i) {
             for (var j = 1; j <= len / i; ++j) {
